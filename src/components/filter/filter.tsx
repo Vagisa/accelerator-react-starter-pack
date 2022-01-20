@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { GuitarsType, StringCounts, strings } from '../../const';
+import { GuitarsType, PRICE_FROM_ID, PRICE_TO_ID, StringCounts, STRINGS } from '../../const';
 import { setPriceFrom, setPriceTo, toggleNumberString, toggleTypeGuitar } from '../../store/action';
 import { fetchGuitarsAction } from '../../store/api-actions';
 import {
@@ -24,10 +24,10 @@ function Filter(): JSX.Element {
   const handlePriceChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     const price = parseInt(evt.target.value, 10);
     switch(evt.target.id) {
-      case 'priceMin':
+      case PRICE_FROM_ID:
         dispatch(setPriceFrom(price));
         break;
-      case 'priceMax':
+      case PRICE_TO_ID:
         dispatch(setPriceTo(price));
         break;
     }
@@ -46,11 +46,11 @@ function Filter(): JSX.Element {
       }
     }
     switch(evt.target.id) {
-      case 'priceMin':
+      case PRICE_FROM_ID:
         dispatch(setPriceFrom(price));
         dispatch(fetchGuitarsAction());
         break;
-      case 'priceMax':
+      case PRICE_TO_ID:
         dispatch(setPriceTo(price));
         dispatch(fetchGuitarsAction());
         break;
@@ -67,12 +67,12 @@ function Filter(): JSX.Element {
     dispatch(fetchGuitarsAction());
   };
 
-  let avaliableStringNumber: number[] = [];
+  let avaliableStringNumbers: number[] = [];
   if (typeGuitars.length === 0) {
-    avaliableStringNumber = strings;
+    avaliableStringNumbers = STRINGS;
   }
   typeGuitars.forEach((typeGuitar) =>
-    avaliableStringNumber = [...avaliableStringNumber, ...StringCounts[typeGuitar]],
+    avaliableStringNumbers = [...avaliableStringNumbers, ...StringCounts[typeGuitar]],
   );
 
   return (
@@ -89,7 +89,7 @@ function Filter(): JSX.Element {
               type="number"
               value={priceFrom}
               placeholder="1 000"
-              id="priceMin"
+              id={PRICE_FROM_ID}
               name="от"
             />
           </div>
@@ -101,7 +101,7 @@ function Filter(): JSX.Element {
               type="number"
               value={priceTo}
               placeholder="30 000"
-              id="priceMax"
+              id={PRICE_TO_ID}
               name="до"
             />
           </div>
@@ -128,7 +128,7 @@ function Filter(): JSX.Element {
       <fieldset className="catalog-filter__block">
         <legend className="catalog-filter__block-title">Количество струн</legend>
         {
-          strings.map((string) => (
+          STRINGS.map((string) => (
             <div key={string} className="form-checkbox catalog-filter__block-item">
               <input
                 onChange={() => handleNumberStringsChange(string)}
@@ -137,7 +137,7 @@ function Filter(): JSX.Element {
                 id={`${string}-strings`}
                 name={`${string}-strings`}
                 checked={numberStrings.includes(string)}
-                disabled={!avaliableStringNumber.includes(string)}
+                disabled={!avaliableStringNumbers.includes(string)}
               />
               <label htmlFor={`${string}-strings`}>{string}</label>
             </div>

@@ -36,6 +36,10 @@ export const StringCounts = {
   [GuitarsType.Ukulele]: [4],
 };
 
-export const strings = [4, 6, 7, 12];
+export const STRINGS = [4, 6, 7, 12];
 
 export const PRODUCTS_ON_PAGE = 9;
+
+export const PRICE_FROM_ID = 'priceMin';
+
+export const PRICE_TO_ID = 'priceMax';

@@ -50,7 +50,7 @@ const initialListStore = {
   ORDER: {
     modal: null,
   },
-}
+};
 
 describe('Async actions', () => {
   const api = createAPI();
@@ -73,7 +73,6 @@ describe('Async actions', () => {
       setGuitars(fakeGuitars),
       setPageCount(Math.ceil(fakeGuitars.length / PRODUCTS_ON_PAGE)),
     ]);
-    //expect(store.getActions()).toEqual([setErrorMessage('Произошла ошибка, перезагрузите страницу')]);
   });
   it('should dispatch error message when server is unavailiable', async () => {
     mockAPI

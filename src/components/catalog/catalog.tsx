@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { AppRoute } from '../../const';
 import ErrorModal from '../error-modal/error-modal';
 import Filter from '../filter/filter';
 import Footer from '../footer/footer';
@@ -16,7 +17,7 @@ function Catalog(): JSX.Element {
           <h1 className="page-content__title title title--bigger">Каталог гитар</h1>
           <ul className="breadcrumbs page-content__breadcrumbs">
             <li className="breadcrumbs__item">
-              <Link className="link" to="./main.html">Главная</Link>
+              <Link className="link" to={AppRoute.Main}>Главная</Link>
             </li>
             <li className="breadcrumbs__item">
               <Link className="link" to="">Каталог</Link>

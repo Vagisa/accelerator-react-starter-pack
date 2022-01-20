@@ -1,5 +1,5 @@
 import { commerce, database, datatype, finance, image, internet, random } from 'faker';
-import { GuitarsType, SortOrderOptions, SortTypeOptions, strings } from '../const';
+import { GuitarsType, SortOrderOptions, SortTypeOptions, STRINGS } from '../const';
 import { Comment } from '../types/comment';
 import { Guitar } from '../types/guitar';
 
@@ -46,8 +46,8 @@ export const getRandomGuitarsTypeArray = (): GuitarsType[] =>
     (_, index) => Object.values(GuitarsType)[index]) as GuitarsType[]);
 
 export const getRandomNumberStringsArray = (): number[] =>
-  (new Array(datatype.number(strings.length)).fill(null).map(
-    (_, index) => strings[index]) as number[]);
+  (new Array(datatype.number(STRINGS.length)).fill(null).map(
+    (_, index) => STRINGS[index]) as number[]);
 
 export const getFakeErrorMessage = (): string => commerce.productDescription();
 
