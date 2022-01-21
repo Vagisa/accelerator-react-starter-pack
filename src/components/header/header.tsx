@@ -60,10 +60,10 @@ function Header(): JSX.Element {
               guitars.map((guitar) =>(
                 <li key={guitar.id}
                   className="form-search__select-item"
-                  tabIndex={0}
+                  tabIndex={-1}
                 >
                   <Link onClick={handleSearchStringReset}
-                    className="form-search__select-item"
+                    className="form-search__select-item-link"
                     to={AppRoute.Product.replace(':id', guitar.id.toString())}
                   >
                     {guitar.name}

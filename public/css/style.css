@@ -2284,8 +2284,7 @@ button,
 }
 
 .form-search__select-item {
-  padding-top: 4px;
-  padding-bottom: 4px;
+  display: flex;
 
   font-size: 14px;
   line-height: 19px;
@@ -2300,6 +2299,13 @@ button,
 .form-search__select-item:hover,
 .form-search__select-item:focus {
   color: #545454;
+}
+
+.form-search__select-item-link {
+  color: inherit;
+  width: 100%;
+  padding-top: 4px;
+  padding-bottom: 4px;
 }
 
 .logo {
