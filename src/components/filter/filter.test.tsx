@@ -16,8 +16,8 @@ import {
   makeFakeGuitars } from '../../utils/mocks';
 import Filter from './filter';
 const fakeGuitarItem = makeFakeGuitarItem();
-const fakeFilteredGuitars = makeFakeGuitars();
-const fakeGuitars = [...fakeFilteredGuitars, makeFakeGuitarItem()];
+const fakeGuitars = [...makeFakeGuitars(), makeFakeGuitarItem()];
+const fakeAllGuitars = [...fakeGuitars, ...makeFakeGuitars()];
 const randomSortType = getRandomSortType();
 const randomSortOrder = getRandomSortOrder();
 const randomGuitarsType = getRandomGuitarsTypeArray();
@@ -34,7 +34,7 @@ const mockStore = configureMockStore<
 const store = mockStore({
   GUITARS: {
     guitars: fakeGuitars,
-    filteredGuitars: fakeFilteredGuitars,
+    allGuitars: fakeAllGuitars,
     sortType: randomSortType,
     sortOrder: randomSortOrder,
     searchString: fakeGuitarItem.name,

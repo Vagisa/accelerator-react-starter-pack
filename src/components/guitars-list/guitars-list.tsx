@@ -52,14 +52,14 @@ function GuitarsList(): JSX.Element {
           <button
             onClick={() => handleSortOrderChange(SortOrderOptions.Ascending)}
             className={`catalog-sort__order-button catalog-sort__order-button--up
-            ${sortOrder === SortOrderOptions.Ascending ? 'catalog-sort__order-button--active' : ''}`}
+            ${sortOrder === SortOrderOptions.Ascending ? ' catalog-sort__order-button--active ' : ''}`}
             aria-label="По возрастанию" tabIndex={-1}
           >
           </button>
           <button
             onClick={() => handleSortOrderChange(SortOrderOptions.Descending)}
             className={`catalog-sort__order-button catalog-sort__order-button--down
-            ${sortOrder === SortOrderOptions.Descending ? 'catalog-sort__order-button--active' : ''}`}
+            ${sortOrder === SortOrderOptions.Descending ? ' catalog-sort__order-button--active ' : ''}`}
             aria-label="По убыванию"
           >
           </button>

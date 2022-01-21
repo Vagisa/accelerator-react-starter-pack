@@ -12,6 +12,13 @@ export const setGuitars = createAction(
   }),
 );
 
+export const setAllGuitars = createAction(
+  ActionType.SetAllGuitars,
+  (guitars: Guitar[]) => ({
+    payload: guitars,
+  }),
+);
+
 export const setPageCount = createAction(
   ActionType.SetPageCount,
   (count: number) => ({
@@ -43,7 +50,7 @@ export const changeSortType = createAction(
 export const changeSortOrder = createAction(
   ActionType.ChangeSortOrder,
   (sortOrder: SortOrderOptions) => ({
-    payload: translateSortOptions(sortOrder),
+    payload: sortOrder,
   }),
 );
 

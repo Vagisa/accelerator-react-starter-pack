@@ -11,8 +11,7 @@ import { getRandomGuitarsTypeArray, getRandomNumberStringsArray, makeFakeGuitarI
 import GuitarItem from './guitar-item';
 import { AppRoute } from '../../const';
 const fakeGuitarItem = makeFakeGuitarItem();
-const fakeFilteredGuitars = makeFakeGuitars();
-const fakeGuitars = [...fakeFilteredGuitars, makeFakeGuitarItem()];
+const fakeGuitars = [...makeFakeGuitars(), makeFakeGuitarItem()];
 const randomGuitarsType = getRandomGuitarsTypeArray();
 const randomNumberStrings = getRandomNumberStringsArray();
 
@@ -27,7 +26,6 @@ const mockStore = configureMockStore<
 const store = mockStore({
   GUITARS: {
     guitars: fakeGuitars,
-    filteredGuitars: fakeFilteredGuitars,
     searchString: fakeGuitarItem.name,
     typeGuitars: randomGuitarsType,
     numberStrings: randomNumberStrings,

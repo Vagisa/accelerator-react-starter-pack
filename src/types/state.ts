@@ -5,7 +5,7 @@ import { Guitar } from './guitar';
 
 export type Guitars = {
   guitars: Guitar[],
-  filteredGuitars: Guitar[],
+  allGuitars: Guitar[],
   sortType: string,
   sortOrder: string,
   searchString: string | undefined,

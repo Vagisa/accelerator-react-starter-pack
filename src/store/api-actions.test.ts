@@ -6,6 +6,7 @@ import { configureMockStore } from '@jedmao/redux-mock-store';
 
 import { APIRoute, PRODUCTS_ON_PAGE } from '../const';
 import {
+  setAllGuitars,
   setComments,
   setErrorMessage,
   setGuitar,
@@ -13,14 +14,14 @@ import {
   setPageCount} from './action';
 import { State } from '../types/state';
 import { getFakePageCount, getRandomGuitarsTypeArray, getRandomNumberStringsArray, getRandomSortOrder, getRandomSortType, makeFakeComments, makeFakeGuitarItem, makeFakeGuitars } from '../utils/mocks';
-import { fetchCommentsAction, fetchGuitarItemAction, fetchGuitarsAction } from './api-actions';
+import { fetchAllGuitarsAction, fetchCommentsAction, fetchGuitarItemAction, fetchGuitarsAction } from './api-actions';
 import { datatype } from 'faker';
 
 const fakeGuitar = makeFakeGuitarItem();
 const fakeComments = makeFakeComments();
 const fakePageCount = getFakePageCount();
-const fakeFilteredGuitars = makeFakeGuitars();
-const fakeGuitars = [...fakeFilteredGuitars, makeFakeGuitarItem()];
+const fakeGuitars = [...makeFakeGuitars(), makeFakeGuitarItem()];
+const fakeAllGuitars = [...fakeGuitars, ...makeFakeGuitars()];
 const randomSortType = getRandomSortType();
 const randomSortOrder = getRandomSortOrder();
 const randomGuitarsType = getRandomGuitarsTypeArray();
@@ -29,7 +30,7 @@ const randomNumberStrings = getRandomNumberStringsArray();
 const initialListStore = {
   GUITARS: {
     guitars: makeFakeGuitars(),
-    filteredGuitars: fakeFilteredGuitars,
+    allGuitars: [...fakeGuitars, ...makeFakeGuitars()],
     sortType: randomSortType,
     sortOrder: randomSortOrder,
     searchString: fakeGuitar.name,
@@ -82,6 +83,27 @@ describe('Async actions', () => {
     const store = mockStore(initialListStore);
     await store.dispatch(fetchGuitarsAction());
     expect(store.getActions()).toEqual([setErrorMessage('Произошла ошибка, перезагрузите страницу')]);
+  });
+  it('should dispatch fill all guitars list when GET /guitars', async () => {
+    mockAPI
+      .onGet(APIRoute.Guitars)
+      .reply(200, fakeAllGuitars);
+
+    const store = mockStore(initialListStore);
+    await store.dispatch(fetchAllGuitarsAction());
+    expect(store.getActions()).toEqual([
+      setAllGuitars(fakeAllGuitars),
+    ]);
+  });
+  it('should also send an error message when the server is not available', async () => {
+    mockAPI
+      .onGet(APIRoute.Guitars)
+      .reply(500);
+
+    const store = mockStore(initialListStore);
+    await store.dispatch(fetchAllGuitarsAction());
+    expect(store.getActions()).toEqual(
+      [setErrorMessage('Произошла ошибка, перезагрузите страницу')]);
   });
   it('should dispatch set Guitar when GET /guitars/:id', async () => {
     mockAPI

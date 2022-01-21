@@ -6,8 +6,8 @@ import { Router } from 'react-router-dom';
 import { getRandomGuitarsTypeArray, getRandomNumberStringsArray, makeFakeGuitarItem, makeFakeGuitars } from '../../utils/mocks';
 import Catalog from './catalog';
 const fakeGuitarItem = makeFakeGuitarItem();
-const fakeFilteredGuitars = makeFakeGuitars();
-const fakeGuitars = [...fakeFilteredGuitars, makeFakeGuitarItem()];
+const fakeGuitars = [...makeFakeGuitars(), makeFakeGuitarItem()];
+const fakeAllGuitars = [...fakeGuitars, ...makeFakeGuitars()];
 const randomGuitarsType = getRandomGuitarsTypeArray();
 const randomNumberStrings = getRandomNumberStringsArray();
 
@@ -19,7 +19,7 @@ describe('Component: Catalog', () => {
     const store = mockStore({
       GUITARS: {
         guitars: fakeGuitars,
-        filteredGuitars: fakeFilteredGuitars,
+        allGuitars: fakeAllGuitars,
         searchString: fakeGuitarItem.name,
         typeGuitars: randomGuitarsType,
         numberStrings: randomNumberStrings,

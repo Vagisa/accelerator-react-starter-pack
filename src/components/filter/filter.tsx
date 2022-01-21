@@ -88,7 +88,7 @@ function Filter(): JSX.Element {
               onBlur={handlePriceFieldBlur}
               type="number"
               value={priceFrom}
-              placeholder="1 000"
+              placeholder={minPrice.toString()}
               id={PRICE_FROM_ID}
               name="от"
             />
@@ -100,7 +100,7 @@ function Filter(): JSX.Element {
               onBlur={handlePriceFieldBlur}
               type="number"
               value={priceTo}
-              placeholder="30 000"
+              placeholder={maxPrice.toString()}
               id={PRICE_TO_ID}
               name="до"
             />

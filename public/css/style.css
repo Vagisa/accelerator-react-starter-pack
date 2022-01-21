@@ -1818,6 +1818,7 @@ button,
 
 .catalog-sort__order-button--active {
   border-top-color: #131212;
+  border-bottom-color: #131212;
 
   pointer-events: none;
 }

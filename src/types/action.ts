@@ -7,6 +7,7 @@ export enum ActionType {
   ChangeSortType = 'changeSortType',
   ChangeSortOrder = 'changeSortOrder',
   SetGuitars = 'setGuitars',
+  SetAllGuitars = 'setAllGuitars',
   SetGuitar = 'setGuitar',
   SetComments = 'setComments',
   SetSearchString = 'SetSearchString',

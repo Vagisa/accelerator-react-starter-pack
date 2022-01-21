@@ -12,17 +12,23 @@ function Footer(): JSX.Element {
           <ul className="socials__list">
             <li className="socials-item">
               <Link className="socials__link" to="https://www.facebook.com/" aria-label="facebook">
-                <img src="/img/facebook.svg" alt="facebook"  width="24" height="24"/>
+                <svg className="socials__icon" width="24" height="24" aria-hidden="true">
+                  <use xlinkHref="#icon-facebook"></use>
+                </svg>
               </Link>
             </li>
             <li className="socials-item">
               <Link className="socials__link" to="https://www.instagram.com/" aria-label="instagram">
-                <img src="/img/instagram.svg" alt="instagram"  width="24" height="24"/>
+                <svg className="socials__icon" width="24" height="24" aria-hidden="true">
+                  <use xlinkHref="#icon-instagram"></use>
+                </svg>
               </Link>
             </li>
             <li className="socials-item">
               <Link className="socials__link" to="https://www.twitter.com/" aria-label="twitter">
-                <img src="/img/twitter.svg" alt="twitter"  width="24" height="24"/>
+                <svg className="socials__icon" width="24" height="24" aria-hidden="true">
+                  <use xlinkHref="#icon-twitter"></use>
+                </svg>
               </Link>
             </li>
           </ul>

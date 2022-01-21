@@ -12,6 +12,7 @@ import {
   changeSortOrder,
   changeSortType,
   setGuitars,
+  setAllGuitars,
   setPriceFrom,
   setPriceTo,
   setSearchString,
@@ -23,7 +24,7 @@ import {
 
 export const initialState: Guitars = {
   guitars: [],
-  filteredGuitars: [],
+  allGuitars: [],
   sortType: SortTypeOptions.Default,
   sortOrder: SortOrderOptions.Default,
   searchString: undefined,
@@ -39,6 +40,9 @@ const guitarsReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(setGuitars, (state, action) => {
       state.guitars = action.payload;
+    })
+    .addCase(setAllGuitars, (state, action) => {
+      state.allGuitars = action.payload;
     })
     .addCase(changeSortType, (state, action) => {
       state.sortType = action.payload;
