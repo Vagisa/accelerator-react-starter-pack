@@ -68,12 +68,24 @@ function Filter(): JSX.Element {
   };
 
   let avaliableStringNumbers: number[] = [];
+
   if (typeGuitars.length === 0) {
     avaliableStringNumbers = STRINGS;
   }
   typeGuitars.forEach((typeGuitar) =>
     avaliableStringNumbers = [...avaliableStringNumbers, ...StringCounts[typeGuitar]],
   );
+
+
+  const availiableGuitarTypes = Object.values(GuitarsType).filter((guitar) => {
+    if (numberStrings.length === 0) {
+      return true;
+    }
+    if (typeGuitars.includes(guitar)) {
+      return true;
+    }
+    return numberStrings.some((stringNumber) => StringCounts[guitar].includes(stringNumber));
+  });
 
   return (
     <form className="catalog-filter">
@@ -119,6 +131,7 @@ function Filter(): JSX.Element {
                 id={type}
                 name={type}
                 checked={typeGuitars.includes(type)}
+                disabled={!availiableGuitarTypes.includes(type)}
               />
               <label htmlFor={type}>{translateTypeGuitars(type)}</label>
             </div>
