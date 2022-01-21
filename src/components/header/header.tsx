@@ -4,11 +4,13 @@ import { setSearchString } from '../../store/action';
 import { getGuitarsList, getSearchString } from '../../store/guitars/selectors';
 import { AppRoute } from '../../const';
 import { fetchGuitarsAction } from '../../store/api-actions';
+import { Guitar } from '../../types/guitar';
 
 function Header(): JSX.Element {
   const searchString = useSelector(getSearchString);
   const guitars = useSelector(getGuitarsList);
   const dispatch = useDispatch();
+
   const handleSearchStringChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setSearchString(evt.target.value));
     dispatch(fetchGuitarsAction());
@@ -16,6 +18,16 @@ function Header(): JSX.Element {
 
   const handleSearchStringReset = () =>
     dispatch(dispatch(setSearchString('')));
+
+  if (searchString) {
+    guitars.sort((first, second) => {
+      const getIndex = (guitar: Guitar) => {
+        const index = guitar.name.indexOf(searchString);
+        return index < 0 ? Infinity : index;
+      };
+      return getIndex(first) - getIndex(second);
+    });
+  }
 
   return (
     <header className="header" id="header">
