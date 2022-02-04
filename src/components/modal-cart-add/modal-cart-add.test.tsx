@@ -33,7 +33,8 @@ describe('Component: ModalCartAdd', () => {
         message: '',
       },
       ORDER: {
-        modal: fakeGuitar,
+        guitarForCart: fakeGuitar,
+        guitarForComment: null,
       },
     });
     render(

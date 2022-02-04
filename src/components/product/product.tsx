@@ -2,13 +2,14 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { AppRoute, COMMENTS_ON_PAGE, TabButtonType } from '../../const';
-import { closeModal, openModal } from '../../store/action';
+import { clearGuitarForCart, setGuitarForCart, setGuitarForComment } from '../../store/action';
 import { fetchCommentsAction, fetchGuitarItemAction } from '../../store/api-actions';
 import { getComments, getGuitarItem } from '../../store/guitar/selectors';
 import { formatNumber, translateTabButton, translateTypeGuitars } from '../../utils/utils';
 import Footer from '../footer/footer';
 import Header from '../header/header';
 import ModalCartAdd from '../modal-cart-add/modal-cart-add';
+import ModalCommentAdd from '../modal-comment-add/modal-comment-add';
 import NotFound from '../not-found/not-found';
 import Rating from '../rating/rating';
 
@@ -24,13 +25,19 @@ function Product(): JSX.Element {
     dispatch(fetchGuitarItemAction(id));
     dispatch(fetchCommentsAction(id));
     return () => {
-      dispatch(closeModal());
+      dispatch(clearGuitarForCart());
     };
   }, [dispatch, id]);
 
-  const handleModalButton = () => {
+  const handleModalForCartButton = () => {
     if (guitar) {
-      dispatch(openModal(guitar));
+      dispatch(setGuitarForCart(guitar));
+    }
+  };
+
+  const handleModalForCommentButton = () => {
+    if (guitar) {
+      dispatch(setGuitarForComment(guitar));
     }
   };
 
@@ -145,7 +152,7 @@ function Product(): JSX.Element {
                 {formatNumber(guitar.price)} ₽
               </p>
               <Link
-                onClick={handleModalButton}
+                onClick={handleModalForCartButton}
                 className="button button--red button--big product-container__button"
                 to="#"
               >
@@ -157,7 +164,9 @@ function Product(): JSX.Element {
             <h3 className="reviews__title title title--bigger">
               Отзывы
             </h3>
-            <Link className="button button--red-border button--big reviews__sumbit-button"
+            <Link
+              onClick={handleModalForCommentButton}
+              className="button button--red-border button--big reviews__sumbit-button"
               to="#"
             >
               Оставить отзыв
@@ -188,6 +197,7 @@ function Product(): JSX.Element {
       </main>
       <Footer />
       <ModalCartAdd />
+      <ModalCommentAdd />
     </div>
   );
 }

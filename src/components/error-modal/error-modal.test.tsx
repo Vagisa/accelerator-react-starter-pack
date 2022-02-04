@@ -32,7 +32,8 @@ describe('Component: ErrorModal', () => {
         message: errorMessage,
       },
       ORDER: {
-        modal: null,
+        guitarForCart: null,
+        guitarForComment: null,
       },
     });
     render(

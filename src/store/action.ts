@@ -103,14 +103,26 @@ export const setErrorMessage = createAction(
   }),
 );
 
-export const openModal = createAction(
-  ActionType.OpenModal,
+export const setGuitarForCart = createAction(
+  ActionType.SetGuitarForCart,
   (guitar: Guitar) => ({
     payload: guitar,
   }),
 );
 
-export const closeModal = createAction(
-  ActionType.CloseModal,
+export const clearGuitarForCart = createAction(
+  ActionType.ClearGuitarForCart,
+  () => ({payload: null}),
+);
+
+export const setGuitarForComment = createAction(
+  ActionType.SetGuitarForComment,
+  (guitar: Guitar) => ({
+    payload: guitar,
+  }),
+);
+
+export const clearGuitarForComment = createAction(
+  ActionType.ClearGuitarForComment,
   () => ({payload: null}),
 );

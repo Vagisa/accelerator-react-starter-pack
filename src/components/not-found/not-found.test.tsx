@@ -29,7 +29,8 @@ describe('Component: NotFound', () => {
         message: '',
       },
       ORDER: {
-        modal: null,
+        guitarForCart: null,
+        guitarForComment: null,
       },
     });
     render(

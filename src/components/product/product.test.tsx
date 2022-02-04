@@ -36,12 +36,14 @@ const store = mockStore({
   },
   GUITAR: {
     guitar: fakeGuitarItem,
+    comments: [],
   },
   ERROR: {
     message: '',
   },
   ORDER: {
-    modal: null,
+    guitarForCart: null,
+    guitarForComment: null,
   },
 });
 const history = createMemoryHistory();
@@ -57,6 +59,5 @@ describe('Component: Product', () => {
       </Provider>);
 
     expect(screen.getByText(new RegExp(`${fakeGuitarItem.description}`, 'i'))).toBeInTheDocument();
-    expect(screen.getByText(new RegExp(`${fakeGuitarItem.name}`, 'i'))).toBeInTheDocument();
   });
 });

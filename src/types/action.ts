@@ -22,8 +22,10 @@ export enum ActionType {
   PostOrders = 'postOrders',
   RedirectToRoute = 'redirectToRoute',
   SetErrorMessage = 'setErrorMessage',
-  OpenModal = 'openModal',
-  CloseModal = 'closeModal',
+  SetGuitarForCart = 'setGuitarForCart',
+  ClearGuitarForCart = 'clearGuitarForCart',
+  SetGuitarForComment = 'setGuitarForComment',
+  ClearGuitarForComment = 'clearGuitarForComment',
 }
 
 export type ThunkActionResult<R = Promise<void>> = ThunkAction<R, State, AxiosInstance, Action>;

@@ -1,25 +1,51 @@
 import { makeFakeGuitarItem } from '../../utils/mocks';
-import { closeModal, openModal } from '../action';
+import { clearGuitarForCart, clearGuitarForComment, setGuitarForCart, setGuitarForComment } from '../action';
 import { orderReducer } from './order-reducer';
 
 const fakeGuitarItem = makeFakeGuitarItem();
 describe('Reducer: orderReducer', () => {
-  it('should open modal', () => {
+  it('should open modal for adding to cart', () => {
     const state = {
-      modal: null,
+      guitarForCart: null,
+      guitarForComment: null,
     };
-    expect(orderReducer(state, openModal(fakeGuitarItem)))
+    expect(orderReducer(state, setGuitarForCart(fakeGuitarItem)))
       .toEqual({
-        modal: fakeGuitarItem,
+        guitarForCart: fakeGuitarItem,
+        guitarForComment: null,
       });
   });
-  it('should close modal', () => {
+  it('should close modal for adding to cart', () => {
     const state = {
-      modal: fakeGuitarItem,
+      guitarForCart: fakeGuitarItem,
+      guitarForComment: null,
     };
-    expect(orderReducer(state, closeModal()))
+    expect(orderReducer(state, clearGuitarForCart()))
       .toEqual({
-        modal: null,
+        guitarForCart: null,
+        guitarForComment: null,
+      });
+  });
+  it('should open modal for adding to comment', () => {
+    const state = {
+      guitarForCart: null,
+      guitarForComment: null,
+    };
+    expect(orderReducer(state, setGuitarForComment(fakeGuitarItem)))
+      .toEqual({
+        guitarForCart: null,
+        guitarForComment: fakeGuitarItem,
+      });
+  });
+  it('should close modal for adding to comment', () => {
+    const state = {
+      guitarForCart: null,
+      guitarForComment: fakeGuitarItem,
+    };
+    expect(orderReducer(state, clearGuitarForComment()))
+      .toEqual({
+        guitarForCart: null,
+        guitarForComment: null,
       });
   });
 });

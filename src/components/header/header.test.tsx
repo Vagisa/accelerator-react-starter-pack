@@ -39,7 +39,8 @@ describe('Component: Header', () => {
         message: '',
       },
       ORDER: {
-        modal: null,
+        guitarForCart: null,
+        guitarForComment: null,
       },
     });
     render(

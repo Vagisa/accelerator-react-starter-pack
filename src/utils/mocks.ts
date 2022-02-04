@@ -2,6 +2,7 @@ import { commerce, database, datatype, finance, image, internet, random } from '
 import { GuitarsType, SortOrderOptions, SortTypeOptions, STRINGS } from '../const';
 import { Comment } from '../types/comment';
 import { Guitar } from '../types/guitar';
+import { translateSortOptions } from './utils';
 
 const NUMBER_OF_FAKE_CASES = 10;
 
@@ -39,7 +40,7 @@ export const getRandomSortType = (): SortTypeOptions => (
   random.arrayElement(Object.values(SortTypeOptions)) as SortTypeOptions);
 
 export const getRandomSortOrder = (): SortOrderOptions => (
-  random.arrayElement(Object.values(SortOrderOptions)) as SortOrderOptions);
+  translateSortOptions(random.arrayElement(Object.values(SortOrderOptions))) as SortOrderOptions);
 
 export const getRandomGuitarsTypeArray = (): GuitarsType[] =>
   (new Array(datatype.number(Object.values(GuitarsType).length)).fill(null).map(

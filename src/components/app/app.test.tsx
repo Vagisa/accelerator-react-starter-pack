@@ -52,7 +52,8 @@ const store = mockStore({
     message: '',
   },
   ORDER: {
-    modal: null,
+    guitarForCart: null,
+    guitarForComment: null,
   },
 });
 

@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { closeModal } from '../../store/action';
-import { getModal } from '../../store/order/selectors';
+import { clearGuitarForCart } from '../../store/action';
+import { getGuitarForCart } from '../../store/order/selectors';
 import { formatNumber, translateTypeGuitars } from '../../utils/utils';
 
 const modalStyle: React.CSSProperties = {
@@ -11,7 +11,7 @@ const modalStyle: React.CSSProperties = {
 };
 
 function ModalCartAdd(): JSX.Element | null {
-  const guitar = useSelector(getModal);
+  const guitar = useSelector(getGuitarForCart);
   const dispatch = useDispatch();
 
   if (!guitar) {
@@ -19,7 +19,7 @@ function ModalCartAdd(): JSX.Element | null {
   }
 
   const handleClose = () => {
-    dispatch(closeModal());
+    dispatch(clearGuitarForCart());
   };
 
   return (

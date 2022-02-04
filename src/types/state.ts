@@ -27,7 +27,8 @@ export type Error = {
 };
 
 export type Cart = {
-  modal: Guitar | null,
+  guitarForCart: Guitar | null,
+  guitarForComment: Guitar | null,
 };
 
 export type State = RootState;

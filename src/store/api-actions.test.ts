@@ -49,7 +49,8 @@ const initialListStore = {
     message: '',
   },
   ORDER: {
-    modal: null,
+    guitarForCart: null,
+    guitarForComment: null,
   },
 };
 

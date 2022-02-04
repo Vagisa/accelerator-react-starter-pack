@@ -1,18 +1,25 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { Cart } from '../../types/state';
-import { closeModal, openModal } from '../action';
+import { clearGuitarForCart, clearGuitarForComment, setGuitarForCart, setGuitarForComment } from '../action';
 
 export const initialState: Cart = {
-  modal: null,
+  guitarForCart: null,
+  guitarForComment: null,
 };
 
 const orderReducer = createReducer(initialState, (builder) => {
   builder
-    .addCase(openModal, (state, action) => {
-      state.modal = action.payload;
+    .addCase(setGuitarForCart, (state, action) => {
+      state.guitarForCart = action.payload;
     })
-    .addCase(closeModal, (state, action) => {
-      state.modal = action.payload;
+    .addCase(clearGuitarForCart, (state, action) => {
+      state.guitarForCart = action.payload;
+    })
+    .addCase(setGuitarForComment, (state, action) => {
+      state.guitarForComment = action.payload;
+    })
+    .addCase(clearGuitarForComment, (state, action) => {
+      state.guitarForComment = action.payload;
     });
 });
 

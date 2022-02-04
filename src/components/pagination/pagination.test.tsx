@@ -31,7 +31,8 @@ describe('Component: Pagination', () => {
         message: '',
       },
       ORDER: {
-        modal: null,
+        guitarForCart: null,
+        guitarForComment: null,
       },
     });
     render(
@@ -53,7 +54,8 @@ describe('Component: Pagination', () => {
         message: '',
       },
       ORDER: {
-        modal: null,
+        guitarForCart: null,
+        guitarForComment: null,
       },
     });
     render(
@@ -75,7 +77,8 @@ describe('Component: Pagination', () => {
         message: '',
       },
       ORDER: {
-        modal: null,
+        guitarForCart: null,
+        guitarForComment: null,
       },
     });
     render(
