@@ -4,6 +4,7 @@ import { GuitarsType, PRICE_FROM_ID, PRICE_TO_ID, StringCounts, STRINGS } from '
 import { setPriceFrom, setPriceTo, toggleNumberString, toggleTypeGuitar } from '../../store/action';
 import { fetchGuitarsAction } from '../../store/api-actions';
 import {
+  getGuitarsList,
   getMaxPrice,
   getMinPrice,
   getNumberStrings,
@@ -13,6 +14,7 @@ import {
 import { translateTypeGuitars } from '../../utils/utils';
 
 function Filter(): JSX.Element {
+  const guitars = useSelector(getGuitarsList);
   const priceFrom = useSelector(getPriceFrom);
   const priceTo = useSelector(getPriceTo);
   const minPrice = useSelector(getMinPrice);
@@ -87,6 +89,8 @@ function Filter(): JSX.Element {
     return numberStrings.some((stringNumber) => StringCounts[guitar].includes(stringNumber));
   });
 
+  const filterdeGuitars = guitars.sort((first, second) => first.price - second.price);
+
   return (
     <form className="catalog-filter">
       <h2 className="title title--bigger catalog-filter__title">Фильтр</h2>
@@ -100,7 +104,11 @@ function Filter(): JSX.Element {
               onBlur={handlePriceFieldBlur}
               type="number"
               value={priceFrom}
-              placeholder={minPrice.toString()}
+              placeholder={
+                filterdeGuitars.length !== 0
+                  ? filterdeGuitars[0].price.toString()
+                  : minPrice.toString()
+              }
               id={PRICE_FROM_ID}
               name="от"
             />
@@ -112,7 +120,11 @@ function Filter(): JSX.Element {
               onBlur={handlePriceFieldBlur}
               type="number"
               value={priceTo}
-              placeholder={maxPrice.toString()}
+              placeholder={
+                filterdeGuitars.length !== 0
+                  ? filterdeGuitars[filterdeGuitars.length - 1].price.toString()
+                  : maxPrice.toString()
+              }
               id={PRICE_TO_ID}
               name="до"
             />
