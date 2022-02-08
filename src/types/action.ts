@@ -27,6 +27,8 @@ export enum ActionType {
   ClearGuitarForCart = 'clearGuitarForCart',
   SetGuitarForComment = 'setGuitarForComment',
   ClearGuitarForComment = 'clearGuitarForComment',
+  SetPostedComment = 'setPostedComment',
+  ClearPostedComment = 'clearPostedComment',
 }
 
 export type ThunkActionResult<R = Promise<void>> = ThunkAction<R, State, AxiosInstance, Action>;

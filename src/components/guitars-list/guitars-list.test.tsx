@@ -41,6 +41,7 @@ describe('Component: GuitarsList', () => {
       ORDER: {
         guitarForCart: null,
         guitarForComment: null,
+        postedComment: null,
       },
     });
     render(

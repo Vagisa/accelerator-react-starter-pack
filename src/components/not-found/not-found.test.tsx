@@ -31,6 +31,7 @@ describe('Component: NotFound', () => {
       ORDER: {
         guitarForCart: null,
         guitarForComment: null,
+        postedComment: null,
       },
     });
     render(

@@ -34,6 +34,7 @@ describe('Component: ErrorModal', () => {
       ORDER: {
         guitarForCart: null,
         guitarForComment: null,
+        postedComment: null,
       },
     });
     render(

@@ -44,6 +44,7 @@ const store = mockStore({
   ORDER: {
     guitarForCart: null,
     guitarForComment: null,
+    postedComment: null,
   },
 });
 const history = createMemoryHistory();

@@ -43,6 +43,7 @@ describe('Component: Catalog', () => {
       ORDER: {
         guitarForCart: null,
         guitarForComment: null,
+        postedComment: null,
       },
     });
     render(

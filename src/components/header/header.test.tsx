@@ -41,6 +41,7 @@ describe('Component: Header', () => {
       ORDER: {
         guitarForCart: null,
         guitarForComment: null,
+        postedComment: null,
       },
     });
     render(

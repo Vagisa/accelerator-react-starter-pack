@@ -51,6 +51,7 @@ const initialListStore = {
   ORDER: {
     guitarForCart: null,
     guitarForComment: null,
+    postedComment: null,
   },
 };
 

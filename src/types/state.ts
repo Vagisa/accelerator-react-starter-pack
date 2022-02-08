@@ -2,6 +2,7 @@ import { GuitarsType } from '../const';
 import { RootState } from '../store/root-reducer';
 import { Comment } from './comment';
 import { Guitar } from './guitar';
+import { CommentPost } from './post';
 
 export type Guitars = {
   guitars: Guitar[],
@@ -26,9 +27,10 @@ export type Error = {
   message: string,
 };
 
-export type Cart = {
+export type Modal = {
   guitarForCart: Guitar | null,
   guitarForComment: Guitar | null,
+  postedComment: CommentPost | null,
 };
 
 export type State = RootState;

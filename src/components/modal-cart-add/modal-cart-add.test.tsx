@@ -35,6 +35,7 @@ describe('Component: ModalCartAdd', () => {
       ORDER: {
         guitarForCart: fakeGuitar,
         guitarForComment: null,
+        postedComment: null,
       },
     });
     render(

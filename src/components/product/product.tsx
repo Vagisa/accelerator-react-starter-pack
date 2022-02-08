@@ -11,6 +11,7 @@ import Footer from '../footer/footer';
 import Header from '../header/header';
 import ModalCartAdd from '../modal-cart-add/modal-cart-add';
 import ModalCommentAdd from '../modal-comment-add/modal-comment-add';
+import ModalThanks from '../modal-thanks/modal-thanks';
 import NotFound from '../not-found/not-found';
 import Rating from '../rating/rating';
 
@@ -179,6 +180,7 @@ function Product(): JSX.Element {
       <Footer />
       <ModalCartAdd />
       <ModalCommentAdd />
+      <ModalThanks />
     </div>
   );
 }

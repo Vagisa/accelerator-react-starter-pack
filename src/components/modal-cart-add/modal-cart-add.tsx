@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearGuitarForCart } from '../../store/action';
 import { getGuitarForCart } from '../../store/order/selectors';
@@ -14,6 +15,19 @@ function ModalCartAdd(): JSX.Element | null {
   const guitar = useSelector(getGuitarForCart);
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    const handleEscFunction =(evt: KeyboardEvent) => {
+      if (evt.key === 'Escape' || evt.key === 'Esc') {
+        dispatch(clearGuitarForCart());
+      }
+    };
+
+    document.addEventListener('keydown', handleEscFunction);
+    return () => {
+      document.removeEventListener('keydown', handleEscFunction);
+    };
+  }, [dispatch]);
+
   if (!guitar) {
     return null;
   }
@@ -26,7 +40,11 @@ function ModalCartAdd(): JSX.Element | null {
     <div style={modalStyle}>
       <div className="modal is-active modal-for-ui-kit">
         <div className="modal__wrapper">
-          <div className="modal__overlay" data-close-modal></div>
+          <div
+            onClick={handleClose}
+            className="modal__overlay" data-close-modal
+          >
+          </div>
           <div className="modal__content">
             <h2 className="modal__header title title--medium">Добавить товар в корзину</h2>
             <div className="modal__info">

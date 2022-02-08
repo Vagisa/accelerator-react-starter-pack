@@ -33,6 +33,7 @@ describe('Component: Pagination', () => {
       ORDER: {
         guitarForCart: null,
         guitarForComment: null,
+        postedComment: null,
       },
     });
     render(
@@ -56,6 +57,7 @@ describe('Component: Pagination', () => {
       ORDER: {
         guitarForCart: null,
         guitarForComment: null,
+        postedComment: null,
       },
     });
     render(
@@ -79,6 +81,7 @@ describe('Component: Pagination', () => {
       ORDER: {
         guitarForCart: null,
         guitarForComment: null,
+        postedComment: null,
       },
     });
     render(

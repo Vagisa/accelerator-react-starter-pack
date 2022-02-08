@@ -12,7 +12,8 @@ import {
   setAllGuitars,
   setPageCount,
   addComment,
-  clearGuitarForComment} from './action';
+  clearGuitarForComment,
+  setPostedComment} from './action';
 import { NameSpace } from './root-reducer';
 
 export const fetchGuitarsAction = (): ThunkActionResult =>
@@ -71,4 +72,5 @@ export const postCommentAction = (comment: CommentPost): ThunkActionResult =>
     const {data} = await api.post<Comment>(APIRoute.Comments, comment);
     dispatch(addComment(data));
     dispatch(clearGuitarForComment());
+    dispatch(setPostedComment(data));
   };

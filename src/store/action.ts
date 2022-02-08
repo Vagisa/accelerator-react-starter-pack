@@ -3,6 +3,7 @@ import { GuitarsType, SortOrderOptions, SortTypeOptions } from '../const';
 import { ActionType } from '../types/action';
 import { Comment } from '../types/comment';
 import { Guitar } from '../types/guitar';
+import { CommentPost } from '../types/post';
 import { translateSortOptions } from '../utils/utils';
 
 export const setGuitars = createAction(
@@ -131,5 +132,17 @@ export const setGuitarForComment = createAction(
 
 export const clearGuitarForComment = createAction(
   ActionType.ClearGuitarForComment,
+  () => ({payload: null}),
+);
+
+export const setPostedComment = createAction(
+  ActionType.SetPostedComment,
+  (comment: CommentPost) => ({
+    payload: comment,
+  }),
+);
+
+export const clearPostedComment = createAction(
+  ActionType.ClearPostedComment,
   () => ({payload: null}),
 );
