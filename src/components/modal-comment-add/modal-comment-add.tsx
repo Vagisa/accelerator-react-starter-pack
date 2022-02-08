@@ -94,6 +94,7 @@ function ModalCommentAdd(): JSX.Element | null {
                     className="form-review__input form-review__input--name"
                     value={userName}
                     id="user-name"
+                    data-testid="user-name"
                     type="text"
                     autoComplete="off"
                     required
@@ -172,6 +173,7 @@ function ModalCommentAdd(): JSX.Element | null {
                 className="form-review__input"
                 value={advantage}
                 id="pros"
+                data-testid="pros"
                 type="text"
                 autoComplete="off"
               />
@@ -183,6 +185,7 @@ function ModalCommentAdd(): JSX.Element | null {
                 className="form-review__input"
                 value={disadvantage}
                 id="disadvantage"
+                data-testid="disadvantage"
                 type="text"
                 autoComplete="off"
               />
@@ -192,6 +195,7 @@ function ModalCommentAdd(): JSX.Element | null {
               <textarea
                 className="form-review__input form-review__input--textarea"
                 id="comment"
+                data-testid="comment"
                 name="review"
                 value={comment}
                 rows={10}

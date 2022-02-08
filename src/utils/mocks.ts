@@ -2,6 +2,7 @@ import { commerce, database, datatype, finance, image, internet, random } from '
 import { GuitarsType, SortOrderOptions, SortTypeOptions, STRINGS } from '../const';
 import { Comment } from '../types/comment';
 import { Guitar } from '../types/guitar';
+import { CommentPost } from '../types/post';
 import { translateSortOptions } from './utils';
 
 const NUMBER_OF_FAKE_CASES = 10;
@@ -16,6 +17,15 @@ export const makeFakeComment = (): Comment => ({
   createAt: datatype.datetime().toString(),
   guitarId: datatype.number(),
 } as Comment);
+
+export const makeFakePostComment = (): CommentPost => ({
+  guitarId: datatype.number(5),
+  userName: internet.userName(),
+  advantage: commerce.productDescription(),
+  disadvantage: commerce.productDescription(),
+  comment: commerce.productDescription(),
+  rating: datatype.number(5),
+} as CommentPost);
 
 export const makeFakeComments = (): Comment[] => (
   new Array(datatype.number(NUMBER_OF_FAKE_CASES)).fill(null).map(makeFakeComment) as Comment[]);

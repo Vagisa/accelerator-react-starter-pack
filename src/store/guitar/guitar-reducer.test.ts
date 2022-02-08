@@ -1,11 +1,13 @@
 import {
+  makeFakeComment,
   makeFakeComments,
   makeFakeGuitarItem } from '../../utils/mocks';
-import { setComments, setGuitar } from '../action';
+import { addComment, setComments, setGuitar } from '../action';
 import { guitarReducer } from './guitar-reducer';
 
 const fakeGuitarItem = makeFakeGuitarItem();
-const fakeComments = fakeGuitarItem.comments;
+const fakeComments = makeFakeComments();
+const fakeComment = makeFakeComment();
 describe('Reducer: guitarReducer', () => {
   it('should change the guitar', () => {
     const state = {
@@ -27,6 +29,17 @@ describe('Reducer: guitarReducer', () => {
       .toEqual({
         guitar: fakeGuitarItem,
         comments: fakeComments,
+      });
+  });
+  it('adds a comment', () => {
+    const state = {
+      guitar: fakeGuitarItem,
+      comments: fakeComments,
+    };
+    expect(guitarReducer(state, addComment(fakeComment)))
+      .toEqual({
+        guitar: fakeGuitarItem,
+        comments: [fakeComment, ...fakeComments],
       });
   });
 });
