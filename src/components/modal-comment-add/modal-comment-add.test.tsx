@@ -1,4 +1,5 @@
 import {render, screen} from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { Action } from 'redux';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import { createMemoryHistory } from 'history';
@@ -50,14 +51,14 @@ describe('Component: ModalCommentAdd', () => {
     expect(screen.getByLabelText(/Недостатки/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/Комментарий/i)).toBeInTheDocument();
 
-    // userEvent.type(screen.getByTestId('user-name'), 'test-name');
-    // userEvent.type(screen.getByTestId('pros'), 'test-advantages');
-    // userEvent.type(screen.getByTestId('disadvantage'), 'test-disadvantages');
-    // userEvent.type(screen.getByTestId('comment'), 'test-comment');
+    userEvent.type(screen.getByTestId('user-name'), 'test-name');
+    userEvent.type(screen.getByTestId('pros'), 'test-advantages');
+    userEvent.type(screen.getByTestId('disadvantage'), 'test-disadvantages');
+    userEvent.type(screen.getByTestId('comment'), 'test-comment');
 
-    // expect(screen.getByDisplayValue(/test-name/i)).toBeInTheDocument();
-    // expect(screen.getByDisplayValue(/test-advantages/i)).toBeInTheDocument();
-    // expect(screen.getByDisplayValue(/test-disadvantages/i)).toBeInTheDocument();
-    // expect(screen.getByDisplayValue(/test-comment/i)).toBeInTheDocument();
+    expect(screen.getByDisplayValue(/test-name/i)).toBeInTheDocument();
+    expect(screen.getByDisplayValue(/test-advantages/i)).toBeInTheDocument();
+    expect(screen.getByDisplayValue(/test-disadvantages/i)).toBeInTheDocument();
+    expect(screen.getByDisplayValue(/test-comment/i)).toBeInTheDocument();
   });
 });

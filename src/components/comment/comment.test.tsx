@@ -56,7 +56,7 @@ describe('Component: Comment', () => {
         </Router>
       </Provider>);
     expect(screen.getByText(fakeComment.userName)).toBeInTheDocument();
-    // expect(screen.getByText(fakeComment.disadvantage)).toBeInTheDocument();
+    expect(screen.getByText(fakeComment.disadvantage)).toBeInTheDocument();
     expect(screen.getByText(fakeComment.comment)).toBeInTheDocument();
   });
 });
