@@ -8,8 +8,11 @@ import { GuitarItemProps } from './types';
 
 function GuitarItem({guitar}: GuitarItemProps): JSX.Element {
   const dispatch = useDispatch();
-  const handleModalButton = () =>
+  const handleModalButton = () => {
     dispatch(setGuitarForCart(guitar));
+    document.body.style.overflow = 'hidden';
+  };
+
   const handleSearchStringReset = () =>
     dispatch(dispatch(setSearchString('')));
   return (

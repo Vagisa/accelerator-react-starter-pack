@@ -20,6 +20,7 @@ function ModalThanks(): JSX.Element | null {
     const handleEscFunction =(evt: KeyboardEvent) => {
       if (evt.key === 'Escape' || evt.key === 'Esc') {
         dispatch(clearPostedComment());
+        document.body.style.overflow = 'unset';
       }
     };
 
@@ -35,6 +36,7 @@ function ModalThanks(): JSX.Element | null {
 
   const handleClose = () => {
     dispatch(clearPostedComment());
+    document.body.style.overflow = 'unset';
   };
 
   return (

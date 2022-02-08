@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
@@ -34,19 +35,22 @@ function Product(): JSX.Element {
   const handleModalForCartButton = () => {
     if (guitar) {
       dispatch(setGuitarForCart(guitar));
+      document.body.style.overflow = 'hidden';
     }
   };
 
   const handleModalForCommentButton = () => {
     if (guitar) {
       dispatch(setGuitarForComment(guitar));
+      document.body.style.overflow = 'hidden';
     }
   };
+  const sortedComments = comments.slice().sort((first, second) => dayjs(second.createAt).unix() - dayjs(first.createAt).unix());
 
   const commentsArray = [];
   for (let i = 0; i < commentsOfPage && i < comments.length; i++) {
     commentsArray.push(
-      <Comment comment={comments[i]} key={comments[i].id} />,
+      <Comment comment={sortedComments[i]} key={sortedComments[i].id} />,
     );
   }
   if (!guitar) {

@@ -24,6 +24,7 @@ function ModalCommentAdd(): JSX.Element | null {
     const handleEscFunction =(evt: KeyboardEvent) => {
       if (evt.key === 'Escape' || evt.key === 'Esc') {
         dispatch(clearGuitarForComment());
+        document.body.style.overflow = 'unset';
       }
     };
 
@@ -39,6 +40,7 @@ function ModalCommentAdd(): JSX.Element | null {
 
   const handleClose = () => {
     dispatch(clearGuitarForComment());
+    document.body.style.overflow = 'unset';
   };
 
   const handleRatingChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
@@ -55,6 +57,11 @@ function ModalCommentAdd(): JSX.Element | null {
       advantage: advantage !== '' ? advantage : '-',
       disadvantage: disadvantage !== '' ? disadvantage : '-',
     }));
+    setUserName('');
+    setComment('');
+    setRating(0);
+    setAdvantage('');
+    setDisadvantage('');
   };
 
   return (

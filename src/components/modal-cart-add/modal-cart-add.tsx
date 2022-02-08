@@ -19,6 +19,7 @@ function ModalCartAdd(): JSX.Element | null {
     const handleEscFunction =(evt: KeyboardEvent) => {
       if (evt.key === 'Escape' || evt.key === 'Esc') {
         dispatch(clearGuitarForCart());
+        document.body.style.overflow = 'unset';
       }
     };
 
@@ -34,6 +35,7 @@ function ModalCartAdd(): JSX.Element | null {
 
   const handleClose = () => {
     dispatch(clearGuitarForCart());
+    document.body.style.overflow = 'unset';
   };
 
   return (
