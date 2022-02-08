@@ -42,6 +42,7 @@ export const fetchGuitarsAction = (): ThunkActionResult =>
       dispatch(setPageCount(pageCount));
     } catch(error) {
       dispatch(setErrorMessage('Произошла ошибка, перезагрузите страницу'));
+      document.body.style.overflow = 'hidden';
     }
   };
 
@@ -52,25 +53,41 @@ export const fetchAllGuitarsAction = (): ThunkActionResult =>
       dispatch(setAllGuitars(data));
     } catch(error) {
       dispatch(setErrorMessage('Произошла ошибка, перезагрузите страницу'));
+      document.body.style.overflow = 'hidden';
     }
   };
 
 export const fetchGuitarItemAction = (guitarId: string): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
-    const {data} = await api.get<Guitar>(APIRoute.Guitar + guitarId);
-    dispatch(setGuitar(data));
+    try {
+      const {data} = await api.get<Guitar>(APIRoute.Guitar + guitarId);
+      dispatch(setGuitar(data));
+    } catch(error) {
+      dispatch(setErrorMessage('Произошла ошибка, перезагрузите страницу'));
+      document.body.style.overflow = 'hidden';
+    }
   };
 
 export const fetchCommentsAction = (guitarId: string): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
-    const {data} = await api.get<Comment[]>(APIRoute.Guitar + guitarId + APIRoute.Comments);
-    dispatch(setComments(data));
+    try {
+      const {data} = await api.get<Comment[]>(APIRoute.Guitar + guitarId + APIRoute.Comments);
+      dispatch(setComments(data));
+    } catch(error) {
+      dispatch(setErrorMessage('Ошибка, комментарии не получены, перезагрузите страницу'));
+      document.body.style.overflow = 'hidden';
+    }
   };
 
 export const postCommentAction = (comment: CommentPost): ThunkActionResult =>
   async (dispatch, _getState, api) => {
-    const {data} = await api.post<Comment>(APIRoute.Comments, comment);
-    dispatch(addComment(data));
-    dispatch(clearGuitarForComment());
-    dispatch(setPostedComment(data));
+    try {
+      const {data} = await api.post<Comment>(APIRoute.Comments, comment);
+      dispatch(addComment(data));
+      dispatch(clearGuitarForComment());
+      dispatch(setPostedComment(data));
+    } catch(error) {
+      dispatch(setErrorMessage('Ошибка, не удалось отправить комментарий'));
+      document.body.style.overflow = 'hidden';
+    }
   };

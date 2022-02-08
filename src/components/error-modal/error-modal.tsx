@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setErrorMessage } from '../../store/action';
 import { getErrorMessage } from '../../store/error/selectors';
@@ -14,12 +14,27 @@ function ErrorModal(): JSX.Element | null {
   const errorMessage = useSelector(getErrorMessage);
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    const handleEscFunction =(evt: KeyboardEvent) => {
+      if (evt.key === 'Escape' || evt.key === 'Esc') {
+        dispatch(setErrorMessage(''));
+        document.body.style.overflow = 'unset';
+      }
+    };
+
+    document.addEventListener('keydown', handleEscFunction);
+    return () => {
+      document.removeEventListener('keydown', handleEscFunction);
+    };
+  }, [dispatch]);
+
   if (errorMessage === '') {
     return null;
   }
 
   const handleClose = () => {
     dispatch(setErrorMessage(''));
+    document.body.style.overflow = 'unset';
   };
 
   return (

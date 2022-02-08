@@ -10,7 +10,6 @@ import { formatNumber, translateTabButton, translateTypeGuitars } from '../../ut
 import Comment from '../comment/comment';
 import Footer from '../footer/footer';
 import Header from '../header/header';
-import ModalCartAdd from '../modal-cart-add/modal-cart-add';
 import ModalCommentAdd from '../modal-comment-add/modal-comment-add';
 import ModalThanks from '../modal-thanks/modal-thanks';
 import NotFound from '../not-found/not-found';
@@ -182,7 +181,6 @@ function Product(): JSX.Element {
         </div>
       </main>
       <Footer />
-      <ModalCartAdd />
       <ModalCommentAdd />
       <ModalThanks />
     </div>
