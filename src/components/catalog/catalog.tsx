@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
-import ErrorModal from '../error-modal/error-modal';
+import { fetchGuitarsAction } from '../../store/api-actions';
 import Filter from '../filter/filter';
 import Footer from '../footer/footer';
 import GuitarsList from '../guitars-list/guitars-list';
 import Header from '../header/header';
-import ModalCartAdd from '../modal-cart-add/modal-cart-add';
 function Catalog(): JSX.Element {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchGuitarsAction());
+  });
 
   return (
     <>
@@ -79,8 +83,6 @@ function Catalog(): JSX.Element {
           </div>
         </main>
         <Footer />
-        <ModalCartAdd />
-        <ErrorModal />
       </div>
     </>
   );

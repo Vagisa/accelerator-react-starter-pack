@@ -30,6 +30,11 @@ export enum GuitarsType {
   Ukulele = 'ukulele',
 }
 
+export enum TabButtonType {
+  Characteristics = 'characteristics',
+  Description = 'description',
+}
+
 export const StringCounts = {
   [GuitarsType.Acoustic]: [6, 7, 12],
   [GuitarsType.Electric]: [4, 6, 7],
@@ -40,6 +45,10 @@ export const STRINGS = [4, 6, 7, 12];
 
 export const PRODUCTS_ON_PAGE = 9;
 
+export const COMMENTS_ON_PAGE = 3;
+
 export const PRICE_FROM_ID = 'priceMin';
 
 export const PRICE_TO_ID = 'priceMax';
+
+export const MAX_RATING = 5;

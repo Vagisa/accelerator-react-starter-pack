@@ -6,18 +6,22 @@ import { configureMockStore } from '@jedmao/redux-mock-store';
 
 import { APIRoute, PRODUCTS_ON_PAGE } from '../const';
 import {
+  addComment,
+  clearGuitarForComment,
   setAllGuitars,
   setComments,
   setErrorMessage,
   setGuitar,
   setGuitars,
-  setPageCount} from './action';
+  setPageCount,
+  setPostedComment} from './action';
 import { State } from '../types/state';
-import { getFakePageCount, getRandomGuitarsTypeArray, getRandomNumberStringsArray, getRandomSortOrder, getRandomSortType, makeFakeComments, makeFakeGuitarItem, makeFakeGuitars } from '../utils/mocks';
-import { fetchAllGuitarsAction, fetchCommentsAction, fetchGuitarItemAction, fetchGuitarsAction } from './api-actions';
+import { getFakePageCount, getRandomGuitarsTypeArray, getRandomNumberStringsArray, getRandomSortOrder, getRandomSortType, makeFakeComment, makeFakeComments, makeFakeGuitarItem, makeFakeGuitars } from '../utils/mocks';
+import { fetchAllGuitarsAction, fetchCommentsAction, fetchGuitarItemAction, fetchGuitarsAction, postCommentAction } from './api-actions';
 import { datatype } from 'faker';
 
 const fakeGuitar = makeFakeGuitarItem();
+const fakeComment = makeFakeComment();
 const fakeComments = makeFakeComments();
 const fakePageCount = getFakePageCount();
 const fakeGuitars = [...makeFakeGuitars(), makeFakeGuitarItem()];
@@ -49,7 +53,9 @@ const initialListStore = {
     message: '',
   },
   ORDER: {
-    modal: null,
+    guitarForCart: null,
+    guitarForComment: null,
+    postedComment: null,
   },
 };
 
@@ -123,6 +129,55 @@ describe('Async actions', () => {
     const store = mockStore();
 
     await store.dispatch(fetchCommentsAction(fakeGuitar.id.toString()));
-    expect(store.getActions()).toEqual([setComments(fakeComments, fakeGuitar.id.toString())]);
+    expect(store.getActions()).toEqual([setComments(fakeComments)]);
+  });
+  it('should dispatch add comment when POST /comments', async () => {
+    mockAPI
+      .onPost(APIRoute.Comments)
+      .reply(200, fakeComment);
+
+    const store = mockStore({
+      GUITARS: {
+        guitars: fakeGuitars,
+        allGuitars: [...fakeGuitars, fakeGuitar],
+        sortType: randomSortType,
+        sortOrder: randomSortOrder,
+        searchString: fakeGuitar.name,
+        priceFrom: fakeGuitar.price,
+        priceTo: fakeGuitar.price + 200,
+        pageNumber: 1,
+        pageCount: fakePageCount,
+        typeGuitars: randomGuitarsType,
+        numberStrings: randomNumberStrings,
+      },
+      GUITAR: {
+        guitar: fakeGuitar,
+        comments: fakeComments,
+      },
+      ERROR: {
+        message: '',
+      },
+      ORDER: {
+        guitarForCart: null,
+        guitarForComment: fakeGuitar,
+        postedComment: null,
+      },
+    });
+
+    const fakePostComment = {
+      guitarId: fakeComment.guitarId,
+      userName: fakeComment.userName,
+      advantage: fakeComment.advantage,
+      disadvantage: fakeComment.disadvantage,
+      comment: fakeComment.comment,
+      rating: fakeComment.rating,
+    };
+
+    await store.dispatch(postCommentAction(fakePostComment));
+    expect(store.getActions()).toEqual([
+      addComment(fakeComment),
+      clearGuitarForComment(),
+      setPostedComment(fakeComment),
+    ]);
   });
 });

@@ -1,24 +1,57 @@
-import { useEffect } from 'react';
+import dayjs from 'dayjs';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
-import { AppRoute } from '../../const';
-import { fetchGuitarItemAction } from '../../store/api-actions';
-import { getGuitarItem } from '../../store/guitar/selectors';
-import { formatNumber, translateTypeGuitars } from '../../utils/utils';
+import { AppRoute, COMMENTS_ON_PAGE, TabButtonType } from '../../const';
+import { clearGuitarForCart, setGuitarForCart, setGuitarForComment } from '../../store/action';
+import { fetchCommentsAction, fetchGuitarItemAction } from '../../store/api-actions';
+import { getComments, getGuitarItem } from '../../store/guitar/selectors';
+import { formatNumber, translateTabButton, translateTypeGuitars } from '../../utils/utils';
+import Comment from '../comment/comment';
 import Footer from '../footer/footer';
 import Header from '../header/header';
+import ModalCommentAdd from '../modal-comment-add/modal-comment-add';
+import ModalThanks from '../modal-thanks/modal-thanks';
 import NotFound from '../not-found/not-found';
 import Rating from '../rating/rating';
 
 function Product(): JSX.Element {
   const guitar = useSelector(getGuitarItem);
+  const comments = useSelector(getComments);
+  const [commentsOfPage, setCommentsOfPage] = useState<number>(COMMENTS_ON_PAGE);
   const {id} = useParams<{id: string}>();
+  const [tab, setTab] = useState(TabButtonType.Characteristics);
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchGuitarItemAction(id));
+    dispatch(fetchCommentsAction(id));
+    return () => {
+      dispatch(clearGuitarForCart());
+    };
   }, [dispatch, id]);
 
+  const handleModalForCartButton = () => {
+    if (guitar) {
+      dispatch(setGuitarForCart(guitar));
+      document.body.style.overflow = 'hidden';
+    }
+  };
+
+  const handleModalForCommentButton = () => {
+    if (guitar) {
+      dispatch(setGuitarForComment(guitar));
+      document.body.style.overflow = 'hidden';
+    }
+  };
+  const sortedComments = comments.slice().sort((first, second) => dayjs(second.createAt).unix() - dayjs(first.createAt).unix());
+
+  const commentsArray = [];
+  for (let i = 0; i < commentsOfPage && i < comments.length; i++) {
+    commentsArray.push(
+      <Comment comment={sortedComments[i]} key={sortedComments[i].id} />,
+    );
+  }
   if (!guitar) {
     return <NotFound />;
   }
@@ -36,7 +69,7 @@ function Product(): JSX.Element {
               <Link className="link" to={AppRoute.Catalog}>Каталог</Link>
             </li>
             <li className="breadcrumbs__item">
-              <Link className="link" to="#">Товар</Link>
+              <Link className="link" to="#">{guitar.name}</Link>
             </li>
           </ul>
           <div className="product-container">
@@ -52,18 +85,27 @@ function Product(): JSX.Element {
               </h2>
               <div className="rate product-container__rating" aria-hidden="true">
                 <Rating rating={4} width={14} height={14} />
-                <span className="rate__count"></span>
+                <span className="rate__count">{comments.length}</span>
                 <span className="rate__message"></span>
               </div>
               <div className="tabs">
-                <Link className="button button--medium tabs__button" to="#characteristics">
-                  Характеристики
-                </Link>
-                <Link className="button button--black-border button--medium tabs__button" to="#description">
-                  Описание
-                </Link>
+                {
+                  Object.values(TabButtonType).map((type) => (
+                    <Link
+                      key={type}
+                      onClick={(evt) => {
+                        evt.preventDefault();
+                        setTab(type);
+                      }}
+                      className={`button  ${!(tab === type) ? 'button--black-border' : ''} button--medium tabs__button`}
+                      to={`#${type}`}
+                    >
+                      {translateTabButton(type)}
+                    </Link>
+                  ))
+                }
                 <div className="tabs__content" id="characteristics">
-                  <table className="tabs__table">
+                  <table className={`tabs__table  ${tab === TabButtonType.Description ? 'hidden' : ''}`}>
                     <tbody>
                       <tr className="tabs__table-row">
                         <td className="tabs__title">Артикул:</td>
@@ -79,7 +121,9 @@ function Product(): JSX.Element {
                       </tr>
                     </tbody>
                   </table>
-                  <p className="tabs__product-description hidden">
+                  <p className={`tabs__product-description
+                  ${tab === TabButtonType.Characteristics ? 'hidden' : ''}`}
+                  >
                     {guitar.description}
                   </p>
                 </div>
@@ -92,69 +136,53 @@ function Product(): JSX.Element {
               <p className="product-container__price-info product-container__price-info--value">
                 {formatNumber(guitar.price)} ₽
               </p>
-              <Link className="button button--red button--big product-container__button" to="#">Добавить в корзину</Link>
+              <Link
+                onClick={handleModalForCartButton}
+                className="button button--red button--big product-container__button"
+                to="#"
+              >
+                Добавить в корзину
+              </Link>
             </div>
           </div>
           <section className="reviews">
-            <h3 className="reviews__title title title--bigger">Отзывы</h3><Link className="button button--red-border button--big reviews__sumbit-button" to="#">Оставить отзыв</Link>
-            <div className="review">
-              <div className="review__wrapper">
-                <h4 className="review__title review__title--author title title--lesser">Иванов Максим</h4><span className="review__date">12 декабря</span>
-              </div>
-              <div className="rate review__rating-panel" aria-hidden="true">
-                <Rating rating={4} width={16} height={16} />
-                <span className="rate__count"></span>
-                <span className="rate__message"></span>
-              </div>
-              <h4 className="review__title title title--lesser">Достоинства:</h4>
-              <p className="review__value">Хороший корпус, чистый звук, стурны хорошего качества</p>
-              <h4 className="review__title title title--lesser">Недостатки:</h4>
-              <p className="review__value">Тугие колонки</p>
-              <h4 className="review__title title title--lesser">Комментарий:</h4>
-              <p className="review__value">У гитары отличный цвет, хороше дерево. Тяжелая, в компдлекте неть чехла и ремня.</p>
-            </div>
-            <div className="review">
-              <div className="review__wrapper">
-                <h4 className="review__title review__title--author title title--lesser">Перова Ольга</h4><span className="review__date">12 декабря</span>
-              </div>
-              <div className="rate review__rating-panel" aria-hidden="true">
-                <Rating rating={4} width={16} height={16} />
-                <span className="rate__count"></span>
-                <span className="rate__message"></span>
-              </div>
-              <h4 className="review__title title title--lesser">Достоинства:</h4>
-              <p className="review__value">Хороший корпус, чистый звук, стурны хорошего качества</p>
-              <h4 className="review__title title title--lesser">Недостатки:</h4>
-              <p className="review__value">Тугие колонки</p>
-              <h4 className="review__title title title--lesser">Комментарий:</h4>
-              <p className="review__value">У гитары отличный цвет, хороше дерево. Тяжелая, в компдлекте неть чехла и ремня. </p>
-            </div>
-            <div className="review">
-              <div className="review__wrapper">
-                <h4 className="review__title review__title--author title title--lesser">Преображенская  Ксения</h4><span className="review__date">12 декабря</span>
-              </div>
-              <div className="rate review__rating-panel" aria-hidden="true">
-                <Rating rating={4} width={16} height={16} />
-                <span className="rate__count"></span>
-                <span className="rate__message"></span>
-              </div>
-              <h4 className="review__title title title--lesser">Достоинства:</h4>
-              <p className="review__value">Хороший корпус, чистый звук, стурны хорошего качества</p>
-              <h4 className="review__title title title--lesser">Недостатки:</h4>
-              <p className="review__value">Тугие колонки</p>
-              <h4 className="review__title title title--lesser">Комментарий:</h4>
-              <p className="review__value">
-                У гитары отличный цвет, хороше дерево. Тяжелая, в компдлекте неть чехла и ремня. У гитары отличный цвет, хороше дерево. Тяжелая, в компдлекте неть чехла и ремня. У гитары отличный цвет, хороше дерево. Тяжелая, в компдлекте неть чехла и ремня. У гитары отличный цвет, хороше дерево. Тяжелая, в компдлекте неть чехла и ремня.
-              </p>
-            </div>
-            <button className="button button--medium reviews__more-button">Показать еще отзывы</button>
-            <Link className="button button--up button--red-border button--big reviews__up-button" to="#header">
-              Наверх
+            <h3 className="reviews__title title title--bigger">
+              Отзывы
+            </h3>
+            <Link
+              onClick={handleModalForCommentButton}
+              className="button button--red-border button--big reviews__sumbit-button"
+              to="#"
+            >
+              Оставить отзыв
             </Link>
+            {commentsArray}
+            {comments.length > commentsOfPage && (
+              <button
+                onClick={(evt) => {
+                  evt.preventDefault();
+                  setCommentsOfPage(comments.length);
+                }}
+                className="button button--medium reviews__more-button"
+              >
+                Показать еще отзывы
+              </button>
+            )}
+            {comments.length > 0 && (
+              <Link
+                onClick={() => window.scrollTo(0, 0)}
+                className="button button--up button--red-border button--big reviews__up-button"
+                to="#header"
+              >
+                Наверх
+              </Link>
+            )}
           </section>
         </div>
       </main>
       <Footer />
+      <ModalCommentAdd />
+      <ModalThanks />
     </div>
   );
 }

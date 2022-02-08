@@ -3,6 +3,7 @@ import { GuitarsType, SortOrderOptions, SortTypeOptions } from '../const';
 import { ActionType } from '../types/action';
 import { Comment } from '../types/comment';
 import { Guitar } from '../types/guitar';
+import { CommentPost } from '../types/post';
 import { translateSortOptions } from '../utils/utils';
 
 export const setGuitars = createAction(
@@ -35,8 +36,15 @@ export const setGuitar = createAction(
 
 export const setComments = createAction(
   ActionType.SetComments,
-  (comments: Comment[], guitarId: string) => ({
-    payload: {comments, guitarId},
+  (comments: Comment[]) => ({
+    payload: comments,
+  }),
+);
+
+export const addComment = createAction(
+  ActionType.AddComment,
+  (comment: Comment) => ({
+    payload: comment,
   }),
 );
 
@@ -103,14 +111,38 @@ export const setErrorMessage = createAction(
   }),
 );
 
-export const openModal = createAction(
-  ActionType.OpenModal,
+export const setGuitarForCart = createAction(
+  ActionType.SetGuitarForCart,
   (guitar: Guitar) => ({
     payload: guitar,
   }),
 );
 
-export const closeModal = createAction(
-  ActionType.CloseModal,
+export const clearGuitarForCart = createAction(
+  ActionType.ClearGuitarForCart,
+  () => ({payload: null}),
+);
+
+export const setGuitarForComment = createAction(
+  ActionType.SetGuitarForComment,
+  (guitar: Guitar) => ({
+    payload: guitar,
+  }),
+);
+
+export const clearGuitarForComment = createAction(
+  ActionType.ClearGuitarForComment,
+  () => ({payload: null}),
+);
+
+export const setPostedComment = createAction(
+  ActionType.SetPostedComment,
+  (comment: CommentPost) => ({
+    payload: comment,
+  }),
+);
+
+export const clearPostedComment = createAction(
+  ActionType.ClearPostedComment,
   () => ({payload: null}),
 );

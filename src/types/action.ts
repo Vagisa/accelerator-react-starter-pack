@@ -10,6 +10,7 @@ export enum ActionType {
   SetAllGuitars = 'setAllGuitars',
   SetGuitar = 'setGuitar',
   SetComments = 'setComments',
+  AddComment = 'addComment',
   SetSearchString = 'SetSearchString',
   SetPriceFrom = 'setPriceFrom',
   SetPriceTo = 'setPriceTo',
@@ -22,8 +23,12 @@ export enum ActionType {
   PostOrders = 'postOrders',
   RedirectToRoute = 'redirectToRoute',
   SetErrorMessage = 'setErrorMessage',
-  OpenModal = 'openModal',
-  CloseModal = 'closeModal',
+  SetGuitarForCart = 'setGuitarForCart',
+  ClearGuitarForCart = 'clearGuitarForCart',
+  SetGuitarForComment = 'setGuitarForComment',
+  ClearGuitarForComment = 'clearGuitarForComment',
+  SetPostedComment = 'setPostedComment',
+  ClearPostedComment = 'clearPostedComment',
 }
 
 export type ThunkActionResult<R = Promise<void>> = ThunkAction<R, State, AxiosInstance, Action>;

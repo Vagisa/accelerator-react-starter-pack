@@ -39,7 +39,9 @@ describe('Component: GuitarsList', () => {
         message: '',
       },
       ORDER: {
-        modal: null,
+        guitarForCart: null,
+        guitarForComment: null,
+        postedComment: null,
       },
     });
     render(

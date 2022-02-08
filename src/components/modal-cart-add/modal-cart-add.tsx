@@ -1,6 +1,7 @@
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { closeModal } from '../../store/action';
-import { getModal } from '../../store/order/selectors';
+import { clearGuitarForCart } from '../../store/action';
+import { getGuitarForCart } from '../../store/order/selectors';
 import { formatNumber, translateTypeGuitars } from '../../utils/utils';
 
 const modalStyle: React.CSSProperties = {
@@ -11,22 +12,41 @@ const modalStyle: React.CSSProperties = {
 };
 
 function ModalCartAdd(): JSX.Element | null {
-  const guitar = useSelector(getModal);
+  const guitar = useSelector(getGuitarForCart);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const handleEscFunction =(evt: KeyboardEvent) => {
+      if (evt.key === 'Escape' || evt.key === 'Esc') {
+        dispatch(clearGuitarForCart());
+        document.body.style.overflow = 'unset';
+      }
+    };
+
+    document.addEventListener('keydown', handleEscFunction);
+    return () => {
+      document.removeEventListener('keydown', handleEscFunction);
+    };
+  }, [dispatch]);
 
   if (!guitar) {
     return null;
   }
 
   const handleClose = () => {
-    dispatch(closeModal());
+    dispatch(clearGuitarForCart());
+    document.body.style.overflow = 'unset';
   };
 
   return (
     <div style={modalStyle}>
       <div className="modal is-active modal-for-ui-kit">
         <div className="modal__wrapper">
-          <div className="modal__overlay" data-close-modal></div>
+          <div
+            onClick={handleClose}
+            className="modal__overlay" data-close-modal
+          >
+          </div>
           <div className="modal__content">
             <h2 className="modal__header title title--medium">Добавить товар в корзину</h2>
             <div className="modal__info">

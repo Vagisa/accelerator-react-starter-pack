@@ -1,4 +1,8 @@
-import { GuitarsType, SortOrderOptions, SortTypeOptions } from '../const';
+import {
+  GuitarsType,
+  SortOrderOptions,
+  SortTypeOptions,
+  TabButtonType } from '../const';
 
 export const capitalize = (string: string): string =>
   string.charAt(0).toUpperCase() + string.slice(1);
@@ -40,6 +44,17 @@ export const translateSortOptions = (type: string): string => {
       return 'asc';
     case SortOrderOptions.Descending:
       return 'desc';
+    default:
+      return 'Неизвестно';
+  }
+};
+
+export const translateTabButton = (tab: string): string => {
+  switch(tab) {
+    case TabButtonType.Characteristics:
+      return 'Характеристики';
+    case TabButtonType.Description:
+      return 'Описание';
     default:
       return 'Неизвестно';
   }

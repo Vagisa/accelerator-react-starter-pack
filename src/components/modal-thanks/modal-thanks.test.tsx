@@ -5,11 +5,11 @@ import { createMemoryHistory } from 'history';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router-dom';
 import thunk, { ThunkDispatch } from 'redux-thunk';
-import ErrorModal from './error-modal';
+import ModalThanks from './modal-thanks';
 
 import { State } from '../../types/state';
 import { createAPI } from '../../services/api';
-import { getFakeErrorMessage } from '../../utils/mocks';
+import { makeFakePostComment } from '../../utils/mocks';
 
 const api = createAPI();
 const middlewares = [thunk.withExtraArgument(api)];
@@ -20,8 +20,9 @@ const mockStore = configureMockStore<
   >(middlewares);
 
 const history = createMemoryHistory();
-const errorMessage = getFakeErrorMessage();
-describe('Component: ErrorModal', () => {
+
+const fakePostedComment = makeFakePostComment();
+describe('Component: ModalThanks', () => {
   it('should render correctly', () => {
     const store = mockStore({
       GUITARS: {
@@ -29,21 +30,21 @@ describe('Component: ErrorModal', () => {
         pageCount: 4,
       },
       ERROR: {
-        message: errorMessage,
+        message: '',
       },
       ORDER: {
         guitarForCart: null,
         guitarForComment: null,
-        postedComment: null,
+        postedComment: fakePostedComment,
       },
     });
     render(
       <Provider store={store}>
         <Router history={history}>
-          <ErrorModal />
+          <ModalThanks />
         </Router>
       </Provider>);
-    expect(screen.getByText(/Внимание!/i)).toBeInTheDocument();
-    expect(screen.getByText(new RegExp(`${errorMessage}`, 'i'))).toBeInTheDocument();
+    expect(screen.getByText(/Спасибо за ваш отзыв!/i)).toBeInTheDocument();
+    expect(screen.getByText(/К покупкам!/i)).toBeInTheDocument();
   });
 });

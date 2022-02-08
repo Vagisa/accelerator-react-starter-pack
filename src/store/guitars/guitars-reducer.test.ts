@@ -128,7 +128,7 @@ describe('Reducer: guitarsReducer', () => {
         guitars: fakeGuitars,
         allGuitars: fakeAllGuitars,
         sortType: randomSortType,
-        sortOrder: translateSortOptions(SortOrderOptions.Ascending),
+        sortOrder: SortOrderOptions.Ascending,
         searchString: fakeGuitarItem.name,
         priceFrom: fakeGuitarItem.price,
         priceTo: fakeGuitarItem.price + 200,
