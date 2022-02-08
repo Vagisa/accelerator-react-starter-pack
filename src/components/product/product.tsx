@@ -6,6 +6,7 @@ import { clearGuitarForCart, setGuitarForCart, setGuitarForComment } from '../..
 import { fetchCommentsAction, fetchGuitarItemAction } from '../../store/api-actions';
 import { getComments, getGuitarItem } from '../../store/guitar/selectors';
 import { formatNumber, translateTabButton, translateTypeGuitars } from '../../utils/utils';
+import Comment from '../comment/comment';
 import Footer from '../footer/footer';
 import Header from '../header/header';
 import ModalCartAdd from '../modal-cart-add/modal-cart-add';
@@ -44,27 +45,7 @@ function Product(): JSX.Element {
   const commentsArray = [];
   for (let i = 0; i < commentsOfPage && i < comments.length; i++) {
     commentsArray.push(
-      <div className="review" key={comments[i].id}>
-        <div className="review__wrapper">
-          <h4 className="review__title review__title--author title title--lesser">
-            {comments[i].userName}
-          </h4>
-          <span className="review__date">
-            12 декабря
-          </span>
-        </div>
-        <div className="rate review__rating-panel" aria-hidden="true">
-          <Rating rating={comments[i].rating} width={16} height={16} />
-          <span className="rate__count"></span>
-          <span className="rate__message"></span>
-        </div>
-        <h4 className="review__title title title--lesser">Достоинства:</h4>
-        <p className="review__value">{comments[i].advantages}</p>
-        <h4 className="review__title title title--lesser">Недостатки:</h4>
-        <p className="review__value">{comments[i].disadvantages}</p>
-        <h4 className="review__title title title--lesser">Комментарий:</h4>
-        <p className="review__value">{comments[i].comment}</p>
-      </div>,
+      <Comment comment={comments[i]} key={comments[i].id} />,
     );
   }
   if (!guitar) {

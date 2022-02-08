@@ -23,7 +23,7 @@ describe('Reducer: guitarReducer', () => {
       guitar: fakeGuitarItem,
       comments: makeFakeComments(),
     };
-    expect(guitarReducer(state, setComments(fakeComments, '1')))
+    expect(guitarReducer(state, setComments(fakeComments)))
       .toEqual({
         guitar: fakeGuitarItem,
         comments: fakeComments,

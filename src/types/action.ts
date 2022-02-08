@@ -10,6 +10,7 @@ export enum ActionType {
   SetAllGuitars = 'setAllGuitars',
   SetGuitar = 'setGuitar',
   SetComments = 'setComments',
+  AddComment = 'addComment',
   SetSearchString = 'SetSearchString',
   SetPriceFrom = 'setPriceFrom',
   SetPriceTo = 'setPriceTo',

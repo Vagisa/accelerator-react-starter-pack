@@ -50,3 +50,5 @@ export const COMMENTS_ON_PAGE = 3;
 export const PRICE_FROM_ID = 'priceMin';
 
 export const PRICE_TO_ID = 'priceMax';
+
+export const MAX_RATING = 5;

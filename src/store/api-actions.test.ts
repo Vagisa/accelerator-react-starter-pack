@@ -124,6 +124,6 @@ describe('Async actions', () => {
     const store = mockStore();
 
     await store.dispatch(fetchCommentsAction(fakeGuitar.id.toString()));
-    expect(store.getActions()).toEqual([setComments(fakeComments, fakeGuitar.id.toString())]);
+    expect(store.getActions()).toEqual([setComments(fakeComments)]);
   });
 });

@@ -9,8 +9,8 @@ const NUMBER_OF_FAKE_CASES = 10;
 export const makeFakeComment = (): Comment => ({
   id: finance.currencyCode(),
   userName: internet.userName(),
-  advantages: commerce.productDescription(),
-  disadvantages: commerce.productDescription(),
+  advantage: commerce.productDescription(),
+  disadvantage: commerce.productDescription(),
   comment: commerce.productDescription(),
   rating: datatype.number(5),
   createAt: datatype.datetime().toString(),

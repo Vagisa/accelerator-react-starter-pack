@@ -35,8 +35,15 @@ export const setGuitar = createAction(
 
 export const setComments = createAction(
   ActionType.SetComments,
-  (comments: Comment[], guitarId: string) => ({
-    payload: {comments, guitarId},
+  (comments: Comment[]) => ({
+    payload: comments,
+  }),
+);
+
+export const addComment = createAction(
+  ActionType.AddComment,
+  (comment: Comment) => ({
+    payload: comment,
   }),
 );
 

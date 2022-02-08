@@ -2,6 +2,7 @@ import { APIRoute, PRODUCTS_ON_PAGE } from '../const';
 import { ThunkActionResult } from '../types/action';
 import { Comment } from '../types/comment';
 import { Guitar } from '../types/guitar';
+import { CommentPost } from '../types/post';
 import { translateSortOptions } from '../utils/utils';
 import {
   setComments,
@@ -9,7 +10,9 @@ import {
   setGuitar,
   setGuitars,
   setAllGuitars,
-  setPageCount } from './action';
+  setPageCount,
+  addComment,
+  clearGuitarForComment} from './action';
 import { NameSpace } from './root-reducer';
 
 export const fetchGuitarsAction = (): ThunkActionResult =>
@@ -60,5 +63,12 @@ export const fetchGuitarItemAction = (guitarId: string): ThunkActionResult =>
 export const fetchCommentsAction = (guitarId: string): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
     const {data} = await api.get<Comment[]>(APIRoute.Guitar + guitarId + APIRoute.Comments);
-    dispatch(setComments(data, guitarId));
+    dispatch(setComments(data));
+  };
+
+export const postCommentAction = (comment: CommentPost): ThunkActionResult =>
+  async (dispatch, _getState, api) => {
+    const {data} = await api.post<Comment>(APIRoute.Comments, comment);
+    dispatch(addComment(data));
+    dispatch(clearGuitarForComment());
   };
