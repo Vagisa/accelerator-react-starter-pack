@@ -30,7 +30,7 @@ function Comment({comment}: CommentProps): JSX.Element {
       <p className="review__value">
         {comment.disadvantage}
       </p>
-      <h4 className="review__title title title--lesser">
+      <h4 className="review__title title title--lesser" data-testid="Comment">
         Комментарий:
       </h4>
       <p className="review__value">

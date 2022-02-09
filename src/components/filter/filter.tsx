@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { GuitarsType, PRICE_FROM_ID, PRICE_TO_ID, StringCounts, STRINGS } from '../../const';
+import { GuitarsType, PRICE_FROM_ID, PRICE_TO_ID, STRING_COUNTS, STRINGS } from '../../const';
 import { setPriceFrom, setPriceTo, toggleNumberString, toggleTypeGuitar } from '../../store/action';
 import { fetchGuitarsAction } from '../../store/api-actions';
 import {
@@ -75,7 +75,7 @@ function Filter(): JSX.Element {
     avaliableStringNumbers = STRINGS;
   }
   typeGuitars.forEach((typeGuitar) =>
-    avaliableStringNumbers = [...avaliableStringNumbers, ...StringCounts[typeGuitar]],
+    avaliableStringNumbers = [...avaliableStringNumbers, ...STRING_COUNTS[typeGuitar]],
   );
 
 
@@ -86,7 +86,7 @@ function Filter(): JSX.Element {
     if (typeGuitars.includes(guitar)) {
       return true;
     }
-    return numberStrings.some((stringNumber) => StringCounts[guitar].includes(stringNumber));
+    return numberStrings.some((stringNumber) => STRING_COUNTS[guitar].includes(stringNumber));
   });
 
   const filterdeGuitars = guitars.sort((first, second) => first.price - second.price);

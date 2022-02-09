@@ -35,7 +35,7 @@ export enum TabButtonType {
   Description = 'description',
 }
 
-export const StringCounts = {
+export const STRING_COUNTS = {
   [GuitarsType.Acoustic]: [6, 7, 12],
   [GuitarsType.Electric]: [4, 6, 7],
   [GuitarsType.Ukulele]: [4],
