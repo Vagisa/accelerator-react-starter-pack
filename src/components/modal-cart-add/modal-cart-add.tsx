@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearGuitarForCart } from '../../store/action';
 import { getGuitarForCart } from '../../store/order/selectors';
@@ -13,6 +13,7 @@ const modalStyle: React.CSSProperties = {
 
 function ModalCartAdd(): JSX.Element | null {
   const guitar = useSelector(getGuitarForCart);
+  const refButton = useRef<HTMLButtonElement>(null);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -28,6 +29,10 @@ function ModalCartAdd(): JSX.Element | null {
       document.removeEventListener('keydown', handleEscFunction);
     };
   }, [dispatch]);
+
+  useEffect(() => {
+    refButton?.current?.focus();
+  }, [guitar]);
 
   if (!guitar) {
     return null;
@@ -66,7 +71,12 @@ function ModalCartAdd(): JSX.Element | null {
               </div>
             </div>
             <div className="modal__button-container">
-              <button className="button button--red button--big modal__button modal__button--add">Добавить в корзину</button>
+              <button type="button"
+                ref={refButton}
+                className="button button--red button--big modal__button modal__button--add"
+              >
+                Добавить в корзину
+              </button>
             </div>
             <button onClick={handleClose} className="modal__close-btn button-cross" type="button" aria-label="Закрыть">
               <span className="button-cross__icon"></span>

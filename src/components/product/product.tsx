@@ -161,7 +161,7 @@ function Product(): JSX.Element {
               <button
                 onClick={(evt) => {
                   evt.preventDefault();
-                  setCommentsOfPage(comments.length);
+                  setCommentsOfPage(commentsOfPage + COMMENTS_ON_PAGE);
                 }}
                 className="button button--medium reviews__more-button"
               >
