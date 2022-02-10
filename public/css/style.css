@@ -1799,7 +1799,7 @@ button,
 .catalog-sort__order-button--up {
   border-width: 0 7px 12px;
   border-top-color: transparent;
-  border-bottom-color: #585757;
+  border-bottom-color: rgba(88, 87, 87, 0.7);
 }
 
 .catalog-sort__order-button--up::before {
