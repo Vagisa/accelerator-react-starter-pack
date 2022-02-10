@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
@@ -14,6 +14,7 @@ const modalStyle: React.CSSProperties = {
 
 function ModalThanks(): JSX.Element | null {
   const postedСomment = useSelector(getPostedComment);
+  const refLink = useRef<HTMLAnchorElement>(null);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -29,6 +30,10 @@ function ModalThanks(): JSX.Element | null {
       document.removeEventListener('keydown', handleEscFunction);
     };
   }, [dispatch]);
+
+  useEffect(() => {
+    refLink?.current?.focus();
+  }, [postedСomment]);
 
   if (!postedСomment) {
     return null;
@@ -64,6 +69,7 @@ function ModalThanks(): JSX.Element | null {
             </p>
             <div className="modal__button-container modal__button-container--review">
               <Link
+                ref={refLink}
                 to={AppRoute.Catalog}
                 onClick={handleClose}
                 className="button button--small modal__button modal__button--review"

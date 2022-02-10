@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setErrorMessage } from '../../store/action';
 import { getErrorMessage } from '../../store/error/selectors';
@@ -12,6 +12,7 @@ const modalStyle: React.CSSProperties = {
 
 function ErrorModal(): JSX.Element | null {
   const errorMessage = useSelector(getErrorMessage);
+  const refButton = useRef<HTMLButtonElement>(null);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -27,6 +28,10 @@ function ErrorModal(): JSX.Element | null {
       document.removeEventListener('keydown', handleEscFunction);
     };
   }, [dispatch]);
+
+  useEffect(() => {
+    refButton?.current?.focus();
+  }, [errorMessage]);
 
   if (errorMessage === '') {
     return null;
@@ -54,7 +59,10 @@ function ErrorModal(): JSX.Element | null {
                 </p>
               </div>
             </div>
-            <button onClick={handleClose} className="modal__close-btn button-cross" type="button" aria-label="Закрыть">
+            <button
+              ref={refButton}
+              onClick={handleClose} className="modal__close-btn button-cross" type="button" aria-label="Закрыть"
+            >
               <span className="button-cross__icon"></span>
               <span className="modal__close-btn-interactive-area"></span>
             </button>

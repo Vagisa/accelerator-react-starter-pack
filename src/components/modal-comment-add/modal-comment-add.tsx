@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearGuitarForComment } from '../../store/action';
 import { postCommentAction } from '../../store/api-actions';
@@ -19,6 +19,7 @@ function ModalCommentAdd(): JSX.Element | null {
   const [rating, setRating] = useState(0);
   const [advantage, setAdvantage] = useState('');
   const [disadvantage, setDisadvantage] = useState('');
+  const refInput = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const handleEscFunction =(evt: KeyboardEvent) => {
@@ -33,6 +34,10 @@ function ModalCommentAdd(): JSX.Element | null {
       document.removeEventListener('keydown', handleEscFunction);
     };
   }, [dispatch]);
+
+  useEffect(() => {
+    refInput?.current?.focus();
+  }, [guitar]);
 
   if (!guitar) {
     return null;
@@ -90,6 +95,7 @@ function ModalCommentAdd(): JSX.Element | null {
                     Ваше Имя
                   </label>
                   <input
+                    ref={refInput}
                     onChange={(evt) => {setUserName(evt.target.value);}}
                     className="form-review__input form-review__input--name"
                     value={userName}
