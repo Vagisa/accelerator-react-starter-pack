@@ -1141,6 +1141,10 @@ button,
   margin: 0 auto;
 }
 
+.modal__button--add:focus {
+  border-color: #131212;
+}
+
 .modal__button-container .modal__button--review {
   min-width: 140px;
   margin: 0 auto;
@@ -2125,6 +2129,11 @@ button,
   margin-top: 7px;
   margin-right: 70px;
   margin-left: 70px;
+}
+
+.form-review__button:focus {
+  color: #131212;
+  background-color:#ffffff;
 }
 
 .form-search {
