@@ -128,38 +128,18 @@ function ModalCommentAdd(): JSX.Element | null {
                     <div className="rate rate--reverse">
                       <input
                         onChange={handleRatingChange}
-                        checked={rating === 5}
-                        className="visually-hidden"
+                        checked={rating === 1}
+                        className={`visually-hidden ${rating > 1 ? 'rate__input--active' : ''}`}
                         type="radio"
-                        id="star-5"
+                        id="star-1"
                         name="rate"
-                        value="5"
+                        value="1"
                       />
-                      <label className="rate__label" htmlFor="star-5" title="Отлично"></label>
-                      <input
-                        onChange={handleRatingChange}
-                        checked={rating === 4}
-                        className="visually-hidden"
-                        type="radio"
-                        id="star-4"
-                        name="rate"
-                        value="4"
-                      />
-                      <label className="rate__label" htmlFor="star-4" title="Хорошо"></label>
-                      <input
-                        onChange={handleRatingChange}
-                        checked={rating === 3}
-                        className="visually-hidden"
-                        type="radio"
-                        id="star-3"
-                        name="rate"
-                        value="3"
-                      />
-                      <label className="rate__label" htmlFor="star-3" title="Нормально"></label>
+                      <label className="rate__label" htmlFor="star-1" title="Ужасно"></label>
                       <input
                         onChange={handleRatingChange}
                         checked={rating === 2}
-                        className="visually-hidden"
+                        className={`visually-hidden ${rating > 2 ? 'rate__input--active' : ''}`}
                         type="radio"
                         id="star-2"
                         name="rate"
@@ -168,14 +148,34 @@ function ModalCommentAdd(): JSX.Element | null {
                       <label className="rate__label" htmlFor="star-2" title="Плохо"></label>
                       <input
                         onChange={handleRatingChange}
-                        checked={rating === 1}
-                        className="visually-hidden"
+                        checked={rating === 3}
+                        className={`visually-hidden ${rating > 3 ? 'rate__input--active' : ''}`}
                         type="radio"
-                        id="star-1"
+                        id="star-3"
                         name="rate"
-                        value="1"
+                        value="3"
                       />
-                      <label className="rate__label" htmlFor="star-1" title="Ужасно"></label>
+                      <label className="rate__label" htmlFor="star-3" title="Нормально"></label>
+                      <input
+                        onChange={handleRatingChange}
+                        checked={rating === 4}
+                        className={`visually-hidden ${rating > 4 ? 'rate__input--active' : ''}`}
+                        type="radio"
+                        id="star-4"
+                        name="rate"
+                        value="4"
+                      />
+                      <label className="rate__label" htmlFor="star-4" title="Хорошо"></label>
+                      <input
+                        onChange={handleRatingChange}
+                        checked={rating === 5}
+                        className={`visually-hidden ${rating > 5 ? 'rate__input--active' : ''}`}
+                        type="radio"
+                        id="star-5"
+                        name="rate"
+                        value="5"
+                      />
+                      <label className="rate__label" htmlFor="star-5" title="Отлично"></label>
                       <span className="rate__count"></span>
                       <span className="rate__message">
                         {errorRate}

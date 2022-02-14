@@ -2550,7 +2550,7 @@ button,
 }
 
 .rate--reverse {
-  flex-direction: row-reverse;
+  flex-direction: row;
   justify-content: flex-end;
 
   margin-left: -3px;
@@ -2601,13 +2601,17 @@ button,
   content: "";
 }
 
-.rate > input:checked ~ label {
+.rate > input:checked + label {
   background: url("../img/sprite/icon-full-star.svg") no-repeat top 0 left 0;
   background-size: 18px 20px;
 }
 
-.rate:not(:checked) > label:hover,
-.rate:not(:checked) > label:hover ~ label {
+.rate:not(:checked) > label:hover {
+  background: url("../img/sprite/icon-full-star.svg") no-repeat top 0 left 0;
+  background-size: 18px 20px;
+}
+
+.rate__input--active + label {
   background: url("../img/sprite/icon-full-star.svg") no-repeat top 0 left 0;
   background-size: 18px 20px;
 }
