@@ -60,7 +60,7 @@ function Product(): JSX.Element {
       <Header />
       <main className="page-content">
         <div className="container">
-          <h1 className="page-content__title title title--bigger">Товар</h1>
+          <h1 className="page-content__title title title--bigger">{guitar.name}</h1>
           <ul className="breadcrumbs page-content__breadcrumbs">
             <li className="breadcrumbs__item">
               <Link className="link" to={AppRoute.Main}>Главная</Link>

@@ -1,6 +1,9 @@
 import dayjs from 'dayjs';
+import 'dayjs/locale/ru';
 import { CommentProps } from './types';
 import Rating from '../rating/rating';
+
+dayjs.locale('ru');
 
 function Comment({comment}: CommentProps): JSX.Element {
   return (

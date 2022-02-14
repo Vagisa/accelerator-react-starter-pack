@@ -20,6 +20,8 @@ function ModalCommentAdd(): JSX.Element | null {
   const [rating, setRating] = useState(0);
   const [advantage, setAdvantage] = useState('');
   const [disadvantage, setDisadvantage] = useState('');
+  const [errorName, setErrorName] = useState('');
+  const [errorRate, setErrorRate] = useState('');
 
   useEffect(() => {
     const handleEscFunction =(evt: KeyboardEvent) => {
@@ -50,6 +52,19 @@ function ModalCommentAdd(): JSX.Element | null {
 
   const handleSubmit = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     evt.preventDefault();
+    if (userName ==='') {
+      setErrorName('Заполните поле');
+    } else {
+      setErrorName('');
+    }
+    if (rating === 0) {
+      setErrorRate('Поставьте оценку');
+    } else {
+      setErrorRate('');
+    }
+    if (userName === '' || rating === 0) {
+      return;
+    }
     dispatch(postCommentAction({
       guitarId: guitar.id,
       userName,
@@ -103,7 +118,7 @@ function ModalCommentAdd(): JSX.Element | null {
                       autoFocus
                     />
                     <span className="form-review__warning">
-                      Заполните поле
+                      {errorName}
                     </span>
                   </div>
                   <div>
@@ -163,7 +178,7 @@ function ModalCommentAdd(): JSX.Element | null {
                       <label className="rate__label" htmlFor="star-1" title="Ужасно"></label>
                       <span className="rate__count"></span>
                       <span className="rate__message">
-                        Поставьте оценку
+                        {errorRate}
                       </span>
                     </div>
                   </div>
@@ -210,7 +225,6 @@ function ModalCommentAdd(): JSX.Element | null {
                   onClick={(evt) => {handleSubmit(evt);}}
                   className="button button--medium-20 form-review__button"
                   type="submit"
-                  disabled={userName ==='' && rating === 0}
                 >
                   Отправить отзыв
                 </button>
